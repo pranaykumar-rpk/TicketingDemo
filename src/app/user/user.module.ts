@@ -9,6 +9,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { UserRoutingModule } from './user-routing.module';
 import { MainComponentComponent } from './main-component/main-component.component';
+import {MatCardModule} from '@angular/material/card';
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DashComponent } from './dash/dash.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatGridListModule} from '@angular/material/grid-list';
+
+
+
 
 @NgModule({
   declarations: [
@@ -16,18 +24,24 @@ import { MainComponentComponent } from './main-component/main-component.componen
     UserTicketsComponent,
     NewTicketComponent,
     MyNavBarComponent,
-    MainComponentComponent
-  ],
+    MainComponentComponent,
+    DashComponent
+    ],
   imports: [
     CommonModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    UserRoutingModule
+    MatCardModule,
+    UserRoutingModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatGridListModule
   ],
   exports:[
     UserHomeComponent,
-    MainComponentComponent
+    MainComponentComponent,
+    DashComponent,
   ]
 })
 export class UserModule { }

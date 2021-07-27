@@ -4,16 +4,15 @@ import { UserHomeComponent } from './home/user-home.component';
 import { UserTicketsComponent } from './user-tickets/user-tickets.component';
 import { NewTicketComponent } from './new-ticket/new-ticket.component';
 
-
 const routes: Routes = [
-  {path: '', component:UserHomeComponent },
-  {path: 'home', component:UserHomeComponent },
-  {path: 'my-tickets', component: UserTicketsComponent  },
-  {path: 'raise-ticket', component: NewTicketComponent },
+  { path: 'home', component: UserHomeComponent },
+  { path: 'my-tickets', component: UserTicketsComponent },
+  { path: 'raise-ticket', component: NewTicketComponent },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {}

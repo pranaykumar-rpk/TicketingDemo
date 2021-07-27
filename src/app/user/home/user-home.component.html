@@ -1,1 +1,8 @@
-<p>User Home Works</p>
+<div class="container">
+  <div *ngIf="isLoading; else elseBlock">
+    <mat-spinner *ngIf="isLoading" id="spinner"></mat-spinner>
+  </div>
+  <ng-template #elseBlock>
+    <app-dash></app-dash>
+  </ng-template>
+</div>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ticketing-system-cebc2": {
+      "hosting": {
+        "TicketingSystem": [
+          "ticketing-system-cebc2"
+        ]
+      }
+    }
+  }
+}
