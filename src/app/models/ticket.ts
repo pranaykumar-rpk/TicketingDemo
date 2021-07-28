@@ -2,13 +2,14 @@ import {StatusTicket} from './status-ticket.enum';
 
 export class Ticket {
     ticketId? : string;  
-    title?: string;
+    item?: string;
     description?: string;
     status?: StatusTicket;
-    approved? : boolean;
-    estimated?: Date;
+    loggedDate?: number;
+    resolvedDate?: number;
     raisedBy?: string;
     assignedTo?: string;
+    category? : string;
   }
   
   

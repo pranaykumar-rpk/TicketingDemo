@@ -14,7 +14,10 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { DashComponent } from './dash/dash.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatGridListModule} from '@angular/material/grid-list';
-
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -36,7 +39,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
     UserRoutingModule,
     MatProgressSpinnerModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
   exports:[
     UserHomeComponent,

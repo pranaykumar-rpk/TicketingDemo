@@ -1,1 +1,79 @@
-<p>new-ticket works!</p>
+<form (ngSubmit)="submitTicket()" [formGroup]="myGroup">
+  <mat-form-field appearance="fill">
+    <mat-label>Select Category</mat-label>
+    <mat-select  formControlName="cat"  [(value)]="selectedCategory" name="category">
+      <mat-option *ngFor="let category of categories" [value]="category.value">
+        {{ category.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  {{ selectedCategory }}
+
+  <div *ngIf="selectedCategory != null">
+    <mat-form-field appearance="fill">
+      <mat-label>Select Type</mat-label>
+      <mat-select formControlName="type" [(value)]="selectedType" name="type">
+        <div *ngIf="selectedCategory == 'Internal IT Services'">
+          <mat-option *ngFor="let type of interItTypes" [value]="type.value">
+            {{ type.viewValue }}
+          </mat-option>
+        </div>
+
+        <div *ngIf="selectedCategory == 'HR Services'">
+          <mat-option *ngFor="let type of hrTypes" [value]="type.value">
+            {{ type.viewValue }}
+          </mat-option>
+        </div>
+
+        <div *ngIf="selectedCategory == 'Administrative Services'">
+          <mat-option
+            *ngFor="let type of administrativeTypes"
+            [value]="type.value"
+          >
+            {{ type.viewValue }}
+          </mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+
+    {{ selectedType }}
+  </div>
+
+  <div *ngIf="selectedType != null">
+    <mat-form-field appearance="fill">
+      <mat-label>Select Item</mat-label>
+      <mat-select formControlName="item" [(value)]="selectedItem" name="item">
+        <div *ngIf="selectedCategory == 'Internal IT Services'">
+          <mat-option *ngFor="let item of internalItems" [value]="item.value">
+            {{ item.viewValue }}
+          </mat-option>
+        </div>
+
+        <div *ngIf="selectedCategory == 'HR Services'">
+          <mat-option *ngFor="let item of hrItems" [value]="item.value">
+            {{ item.viewValue }}
+          </mat-option>
+        </div>
+
+        <div *ngIf="selectedCategory == 'Administrative Services'">
+          <mat-option
+            *ngFor="let item of administrativeItems"
+            [value]="item.value"
+          >
+            {{ item.viewValue }}
+          </mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+    {{ selectedItem }}
+  </div>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Ticket Description</mat-label>
+    <textarea matInput formControlName="description" placeholder="Enter Text Here"></textarea>
+  </mat-form-field>
+
+
+  <button mat-raised-button color="primary" onclick="submitTicket()">Submit</button>
+</form>

@@ -1,4 +1,5 @@
-.container{
+
+.container {
   background-color: whitesmoke;
 }
 
@@ -15,16 +16,33 @@
   border-radius: 30px !important;
 }
 
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-}
-
 .dashboard-card-content {
-  text-align: center;
+  text-align: start;
 }
 
-.mat-card-title{
+.mat-card-title {
   font-size: 20;
+}
+
+.img-wrap {
+  width: 200px;
+  height: 300px;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0;
+}
+
+.basic-info{
+  padding: 2rem;
+}
+
+.variation{ 
+  display: flex;
+  flex-direction: column;
+ }
+
+.title{
+  
+  color: orange;
 }

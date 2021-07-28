@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { ProfileServiceService } from '../profile-service.service';
 import { User } from 'src/app/models/user';
+import { Award } from 'src/app/models/award';
 
 @Component({
   selector: 'app-dash',
@@ -11,10 +12,13 @@ import { User } from 'src/app/models/user';
 })
 export class DashComponent implements OnInit{
   userData?: User;
+  awards?: Award[]=[];
 
   ngOnInit(): void {
     this.userData = this.profileService.getuserData();
+    this.awards =  this.userData?.awards;
     console.log("Data from user home component is:",this.userData);
+    console.log("Awards data: ",this.awards);
   }
 
   /** Based on the screen size, switch from standard to one column per row */
@@ -38,5 +42,11 @@ export class DashComponent implements OnInit{
 
   constructor(private breakpointObserver: BreakpointObserver,private profileService: ProfileServiceService) {
     
+  }
+
+  getDate(seconds? : number){
+    var d = new Date(0); 
+    d.setUTCMilliseconds(seconds==undefined?0:seconds);
+    return d.toLocaleDateString();
   }
 }
