@@ -1,5 +1,3 @@
-import { Timestamp } from "rxjs/internal/operators/timestamp";
-
 export class User{
     firstName? : string;
     lastName?: string;

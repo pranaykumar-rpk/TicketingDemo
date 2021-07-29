@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { FormControl, FormGroup } from '@angular/forms';
+import * as firebase from 'firebase';
 import { Category } from 'src/app/models/category';
 import { Item } from 'src/app/models/item';
 import { StatusTicket } from 'src/app/models/status-ticket.enum';
 import { Ticket } from 'src/app/models/ticket';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-ticket',
@@ -12,12 +16,19 @@ import { Ticket } from 'src/app/models/ticket';
   styleUrls: ['./new-ticket.component.css'],
 })
 export class NewTicketComponent implements OnInit {
+  isLoading: boolean = false;
   selectedCategory?: string;
   selectedType?: string;
   selectedItem?: string;
   myGroup!: FormGroup;
   ticket?: Ticket;
-  constructor(private firestore: AngularFirestore) {}
+
+  constructor(
+    private firestore: AngularFirestore,
+    private database: AngularFireDatabase,
+    private snakBar: MatSnackBar,
+    private router: Router
+  ) {}
 
   categories: Category[] = [
     { value: 'Internal IT Services', viewValue: 'Internal IT Services' },
@@ -42,7 +53,7 @@ export class NewTicketComponent implements OnInit {
   hrTypes: Item[] = [
     { value: 'APAC', viewValue: 'APAC' },
     { value: 'Career Hub', viewValue: 'Career Hub' },
-    { value: 'United Kingdom', viewValue: 'EditTicketComponent' },
+    { value: 'United Kingdom', viewValue: 'United Kingdom' },
     { value: 'Ireland', viewValue: 'Ireland' },
     { value: 'Chile', viewValue: 'Chile' },
   ];
@@ -56,7 +67,7 @@ export class NewTicketComponent implements OnInit {
   ];
 
   internalItems: Item[] = [
-    { value: 'Transportation', viewValue: 'APAC' },
+    { value: 'Asset', viewValue: 'APAC' },
     { value: 'Remote Energy Monitoring', viewValue: 'Career Hub' },
     { value: 'Clinet Visit Management', viewValue: 'EditTicketComponent' },
     { value: 'Despatch', viewValue: 'Ireland' },
@@ -87,40 +98,79 @@ export class NewTicketComponent implements OnInit {
       cat: new FormControl(),
       type: new FormControl(),
       item: new FormControl(),
-      description : new FormControl()
+      description: new FormControl(),
     });
   }
 
   submitTicket() {
-    var date =  Date.now();
     console.log('Submit Ticket was called');
+    this.isLoading = true;
+    var currentTimeInMilliseconds = Date.now(); // unix timestamp in milliseconds
+    console.log('Time in millisceonds:', currentTimeInMilliseconds);
     const formData = this.myGroup.value;
-    
-    this.ticket = {
-      ticketId : "678243o5",
-      status : StatusTicket.OPEN,
-      raisedBy : "1797150",
-      loggedDate : 1627499808,
-      item : formData.item,
-      description  : formData.description,
-      category : formData.cat,
-      assignedTo : "admin"
-     }
-    
-  this.firestore.collection("tickets").add(this.ticket).then(data=>{
-      console.log("Added Ticket Successfully:",data);
-  }).catch(err=>{
-      console.log("Error while adding ticket:", err);
-  });    
+    let ticketId = this.database.createPushId();
+    console.log('Unique key:', ticketId);
+    const newTicket = new Ticket(
+      ticketId, // ticketId
+      formData.item, //item
+      formData.description, //description
+      StatusTicket.OPEN, //ticketrStatus
+      currentTimeInMilliseconds, //loggedDate
+      null!, //resolvedDate
+      '1797150', //raisedBy
+      'admin', //assignedTo
+      formData.cat, //category
+      formData.type, //type
+      null! //solution
+    );
 
-  // this.firestore.collection("tickets").doc("7wRJ9xhZNBeBPbcrC6VC").update({
-  //   status: "close",
-  //   solution:"hfkhcewrn"
-  // }).then(doc=>{
-  //     console.log("Updated Successfully");
-  // }).catch(err=>{
-  //   console.log("Error ",err);
-  // });
-  
+    const myObjStr = JSON.stringify(newTicket);
+    console.log(JSON.parse(myObjStr));
+
+    this.firestore
+      .collection('tickets')
+      .doc(ticketId)
+      .set(JSON.parse(myObjStr))
+      .then((data) => {
+        console.log('Added Ticket Successfully:', data);
+        this.isLoading = false;
+        this.snakBar.open('Raised Ticket Succesfully', 'dismiss', {
+          duration: 2000,
+        });
+        this.router.navigate(['/my-tickets']);
+      })
+      .catch((err) => {
+        console.log('Error while adding ticket:', err);
+        this.isLoading = false;
+        this.snakBar.open('Error! Unable to process', 'dismiss', {
+          duration: 5000,
+        });
+      });
+
+    // this.ticket = {
+    //   ticketId : "678243o5",
+    //   status : StatusTicket.OPEN,
+    //   raisedBy : "1797150",
+    //   loggedDate : 1627499808,
+    //   item : formData.item,
+    //   description  : formData.description,
+    //   category : formData.cat,
+    //   assignedTo : "admin"
+    //  }
+
+    // this.firestore.collection("tickets").add(this.ticket).then(data=>{
+    //     console.log("Added Ticket Successfully:",data);
+    // }).catch(err=>{
+    //     console.log("Error while adding ticket:", err);
+    // });
+
+    // this.firestore.collection("tickets").doc("7wRJ9xhZNBeBPbcrC6VC").update({
+    //   status: "close",
+    //   solution:"hfkhcewrn"
+    // }).then(doc=>{
+    //     console.log("Updated Successfully");
+    // }).catch(err=>{
+    //   console.log("Error ",err);
+    // });
   }
 }
