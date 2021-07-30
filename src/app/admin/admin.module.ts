@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MyNavBarComponent,
     EmployeeDetailsComponent,
     TicketsListComponent,
-    EditTicketComponent
+    EditTicketComponent,
   ],
   imports: [
     CommonModule,
@@ -32,10 +33,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AdminRoutingModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule
   ],
-  exports:[
-    AdminMainComponent
-  ]
+  exports: [AdminMainComponent],
 })
-export class AdminModule { }
+export class AdminModule {}

@@ -9,7 +9,6 @@ const routes: Routes = [
   {path: 'admin', component: AdminMainComponent },
   {path: 'employee-details', component: EmployeeDetailsComponent },
   {path: 'tickets-list', component: TicketsListComponent },
-  {path: 'edit-ticket', component: EditTicketComponent },
 ];
 
 @NgModule({
