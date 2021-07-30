@@ -30,11 +30,10 @@ import { FormControl, FormGroup } from '@angular/forms';
     MatTableModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    MatFormField
   ],
-  export
+  exports:[
     LoginComponent,
     RegisterComponent
-  ]
+  ],
 })
 export class AuthModule { }
