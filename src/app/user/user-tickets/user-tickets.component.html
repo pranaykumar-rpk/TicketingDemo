@@ -1,4 +1,4 @@
-<h1>List Of Tickets Available</h1>
+<h1>My Tickets</h1>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="raisedBy">
     <th mat-header-cell *matHeaderCellDef>Raised By</th>
@@ -8,6 +8,13 @@
   <ng-container matColumnDef="ticketId">
     <th mat-header-cell *matHeaderCellDef>Ticket Id</th>
     <td mat-cell *matCellDef="let element">{{ element.ticketId }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="loggedDate">
+    <th mat-header-cell *matHeaderCellDef>Logged Date</th>
+    <td mat-cell *matCellDef="let element">
+      {{ getDate(element.loggedDate) }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="description">
@@ -38,13 +45,6 @@
   <ng-container matColumnDef="category">
     <th mat-header-cell *matHeaderCellDef>Category</th>
     <td mat-cell *matCellDef="let element">{{ element.category }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="loggedDate">
-    <th mat-header-cell *matHeaderCellDef>Logged Date</th>
-    <td mat-cell *matCellDef="let element">
-      {{ getDate(element.loggedDate) }}
-    </td>
   </ng-container>
 
   <ng-container matColumnDef="resolvedDate">

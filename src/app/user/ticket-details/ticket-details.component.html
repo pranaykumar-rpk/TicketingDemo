@@ -1,0 +1,47 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer mode="side" opened>
+    <div *ngFor="let ticket of array">
+      <mat-card class="key" (click)="onSelect(ticket)">
+        <p>Ticket Id: {{ ticket.ticketId }}</p>
+        <p>Category: {{ ticket.category }}</p>
+        <p>Logged Date: {{ getDate(ticket.loggedDate) }}</p>
+      </mat-card>
+    </div>
+  </mat-drawer>
+
+  <div class="value" class="example-sidenav-content">
+    <div class="ticket-summary">
+      <h3>Ticket Summary</h3>
+
+      <div class="row">
+        <div class="column">
+          <div class="card">
+            <h3>Total</h3>
+            <h1 class="count">{{ totalTickets }}</h1>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="card">
+            <h3>Open</h3>
+            <h1 class="count">{{ openedTickets }}</h1>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="card">
+            <h3>Closed</h3>
+            <h1 class="count">{{ closedTickets }}</h1>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="card">
+            <h3>Re-Opened</h3>
+            <h1 class="count">{{ reopnedTickets }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-drawer-container>

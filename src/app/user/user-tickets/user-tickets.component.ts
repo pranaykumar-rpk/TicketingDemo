@@ -12,55 +12,59 @@ export class UserTicketsComponent implements OnInit {
   displayedColumns: string[] = [
     'raisedBy',
     'ticketId',
+    'loggedDate',
     'description',
     'status',
     'assignedTo',
     'type',
     'item',
     'category',
-    'loggedDate',
     'resolvedDate',
-    'solution'
+    'solution',
   ];
 
   dataSource!: MatTableDataSource<any>;
-  array : Ticket[] = [];
+  array: Ticket[] = [];
+  usersList: any[] = [];
   constructor(private firestore: AngularFirestore) {}
   ngOnInit() {
-    this.firestore
-      .collection('tickets')
-      .ref.where('raisedBy', '==', '1797150')
-      .get()
-      .then((docs) => {
-        docs.forEach((documentSnaphot) => {
-          console.log('Document Snapshot', documentSnaphot.data());
-          this.array.push(documentSnaphot.data() as Ticket);
-        });
-        this.dataSource = new MatTableDataSource(this.array); 
-      })
-      .catch((err) => {
-        console.log('Error while loading documents: ', err);
-      });
     // this.firestore
-    //   .collection('tickets').valueChanges()
-    //   .subscribe((data) => {
-    //     this.dataSource = new MatTableDataSource(data);
+    //   .collection('tickets')
+    //   .ref.where('raisedBy', '==', '1797150')
+    //   .get()
+    //   .then((docs) => {
+    //     docs.forEach((documentSnaphot) => {
+    //       console.log('Document Snapshot', documentSnaphot.data());
+    //       this.array.push(documentSnaphot.data() as Ticket);
+    //     });
+    //     this.dataSource = new MatTableDataSource(this.array);
+    //   })
+    //   .catch((err) => {
+    //     console.log('Error while loading documents: ', err);
     //   });
+    // this.firestore
+
+    this.firestore
+      .collection('tickets', (ref) => ref.where('raisedBy', '==', '1797150'))
+      .valueChanges()
+      .subscribe((data) => {
+        this.dataSource = new MatTableDataSource(data);
+      });
   }
 
-  getDate(seconds?: number){
-    var d = new Date(0); 
-    d.setUTCMilliseconds(seconds==undefined?0:seconds);
+  getDate(seconds?: number) {
+    var d = new Date(0);
+    d.setUTCMilliseconds(seconds == undefined ? 0 : seconds);
     return d.toLocaleDateString();
   }
 
-  getStatus(status?: number){
-    if(status==0){
-      return "OPENED";
-    }else if(status==1){
-      return  "CLOSED";
-    }else{
-      return "REOPEN";
+  getStatus(status?: number) {
+    if (status == 0) {
+      return 'OPENED';
+    } else if (status == 1) {
+      return 'CLOSED';
+    } else {
+      return 'REOPEN';
     }
   }
 }
