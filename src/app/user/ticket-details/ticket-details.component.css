@@ -4,11 +4,6 @@
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.example-sidenav-content {
-  /* display: flex; */
-  margin: 2rem;
-}
-
 .key {
   background-color: #2e5cb8;
   color: white;
@@ -73,5 +68,25 @@ h3 {
 
 
 .ticket-details{
-  margin: 20px;
+  margin: 10px;
+  padding: 20px;
+}
+/* 
+.content{
+  margin: 10px;
+} */
+
+.title{
+  color: #2e5cb8;
+  font-size: 20;
+  margin: 2px;
+}
+
+.description{
+  margin: 5px;
+  font: bold;
+}
+
+.example-sidenav-content {
+  /* margin: 1rem; */
 }
