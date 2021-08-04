@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AuthService {
   user: any;
-  
+
   constructor(public afAuth: AngularFireAuth, public router: Router) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
@@ -32,7 +32,6 @@ export class AuthService {
     } catch (e) {
       console.log('Error while login', e);
     }
-
     //  this.router.navigate(['admin/list']);
   }
 
@@ -41,11 +40,13 @@ export class AuthService {
       email,
       password
     );
+    console.log('UID:', result.user?.uid);
+    return result.user?.uid;
   }
 
   async logout() {
     await this.afAuth.signOut();
-    console.log("Logged out");
+    console.log('Logged out');
     //this.router.navigate(['admin/login']);
   }
 
