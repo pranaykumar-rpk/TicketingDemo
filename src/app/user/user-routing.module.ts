@@ -6,7 +6,7 @@ import { NewTicketComponent } from './new-ticket/new-ticket.component';
 
 
 const routes: Routes = [
-  {path: '', component:UserHomeComponent },
+ {path: '', component:UserHomeComponent },
   {path: 'home', component:UserHomeComponent },
   {path: 'my-tickets', component: UserTicketsComponent  },
   {path: 'raise-ticket', component: NewTicketComponent },
