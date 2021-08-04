@@ -43,5 +43,23 @@
         </div>
       </div>
     </div>
+
+
+    <div class="ticket-details">
+        <p>Ticket Id: {{selectedTicket?.ticketId}}</p>
+        <p>Status: {{getStatus(selectedTicket?.status)}}</p>
+        <p>Category: {{selectedTicket?.category}}</p>
+        <p>Type: {{selectedTicket?.type}}</p>
+        <p>Item: {{selectedTicket?.item}}</p>
+        <p>Description: {{selectedTicket?.description}}</p>
+        <p>Raised By: {{selectedTicket?.raisedBy}}</p>
+        <p>Assigned To: {{selectedTicket?.assignedTo}}</p>
+        <p>Resolved Date: {{selectedTicket?.resolvedDate}}</p>
+        <p>Solution: {{selectedTicket?.solution}}</p>
+
+
+    </div>
+
+
   </div>
 </mat-drawer-container>

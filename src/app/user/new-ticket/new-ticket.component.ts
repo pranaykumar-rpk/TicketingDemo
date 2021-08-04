@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { FormControl, FormGroup } from '@angular/forms';
-import * as firebase from 'firebase';
 import { Category } from 'src/app/models/category';
 import { Item } from 'src/app/models/item';
 import { StatusTicket } from 'src/app/models/status-ticket.enum';

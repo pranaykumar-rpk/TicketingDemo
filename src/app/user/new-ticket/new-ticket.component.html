@@ -45,7 +45,6 @@
                   {{ type.viewValue }}
                 </mat-option>
               </div>
-
               <div *ngIf="selectedCategory == 'Administrative Services'">
                 <mat-option
                   *ngFor="let type of administrativeTypes"
@@ -56,7 +55,6 @@
               </div>
             </mat-select>
           </mat-form-field>
-
           {{ selectedType }}
         </div>
 

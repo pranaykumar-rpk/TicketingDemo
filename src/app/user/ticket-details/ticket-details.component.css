@@ -67,8 +67,11 @@ h3 {
 
 .count {
   color: #8c8c8c;
-  font-size: 40;
+  font-size: 100;
   font-weight: bold;
 }
 
 
+.ticket-details{
+  margin: 20px;
+}
