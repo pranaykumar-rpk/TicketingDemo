@@ -53,61 +53,6 @@ export class AppComponent {
         duration: 2000,
       });
     }
-    // var uid = await this.authService.register(
-    //   formData.emailId,
-    //   formData.password
-    // );
-
-    // var dateOfBirth = new Date(formData.dob).getTime();
-
-    // var joinedDate = new Date(formData.joinedDate).getTime();
-
-    // var downloadURL = this.authService.uploadImage(
-    //   this.filePath!,
-    //   formData.emailId
-    // );
-    // (await downloadURL).subscribe((url) => {
-    //   console.log('Image URL:', url);
-
-    //   const newUser = new User(
-    //     formData.firstName,
-    //     formData.lastName,
-    //     formData.gender,
-    //     formData.emailId,
-    //     formData.empId,
-    //     formData.phoneNumber,
-    //     formData.role,
-    //     joinedDate, //joined date
-    //     'Anju Bhargavi Gunisetti', //reports
-    //     'Internal', //projectId
-    //     'Bank Of America', //project name
-    //     [], //awards[]
-    //     dateOfBirth, //dateOfBirth
-    //     url
-    //   );
-    //   const myObjStr = JSON.stringify(newUser);
-    //   console.log(JSON.parse(myObjStr));
-
-    //   this.firestore
-    //     .collection('users')
-    //     .doc(uid)
-    //     .set(JSON.parse(myObjStr))
-    //     .then((data) => {
-    //       console.log('Added user info Successfully:', data);
-    //       this.isLoading = false;
-    //       this.snackBar.open('User Registrated succesfully', 'dismiss', {
-    //         duration: 2000,
-    //       });
-    //       //this.router.navigate(['/my-tickets']);
-    //     })
-    //     .catch((err) => {
-    //       console.log('Error while adding user:', err);
-    //       this.isLoading = false;
-    //       this.snackBar.open('Error! Unable to register', 'dismiss', {
-    //         duration: 2000,
-    //       });
-    //     });
-    // });
   }
 
   async authenticate(formData: any) {
@@ -116,62 +61,62 @@ export class AppComponent {
         formData.emailId,
         formData.password
       );
+
+      var dateOfBirth = new Date(formData.dob).getTime();
+      var joinedDate = new Date(formData.joinedDate).getTime();
+      var downloadURL = this.authService.uploadImage(
+        this.filePath!,
+        formData.emailId
+      );
+      (await downloadURL).subscribe((url) => {
+        console.log('Image URL:', url);
+
+        const newUser = new User(
+          formData.firstName,
+          formData.lastName,
+          formData.gender,
+          formData.emailId,
+          formData.empId,
+          formData.phoneNumber, //mobile number
+          formData.role, //role
+          joinedDate, //joined date
+          'Anju Bhargavi Gunisetti', //reports
+          'Internal', //projectId
+          'Bank Of America', //project name
+          [], //awards[]
+          dateOfBirth, //dateOfBirth
+          url
+        );
+        const myObjStr = JSON.stringify(newUser);
+        console.log(JSON.parse(myObjStr));
+
+        this.firestore
+          .collection('users')
+          .doc(uid)
+          .set(JSON.parse(myObjStr))
+          .then((data) => {
+            console.log('Added user info Successfully:', data);
+            this.isLoading = false;
+            this.snackBar.open('User Registrated succesfully', 'dismiss', {
+              duration: 2000,
+            });
+            //this.router.navigate(['/my-tickets']);
+          })
+          .catch((err) => {
+            console.log('Error while adding user:', err);
+            this.isLoading = false;
+            this.snackBar.open('Error! Unable to register', 'dismiss', {
+              duration: 2000,
+            });
+          });
+      });
     } catch (error) {
       this.isLoading = false;
       console.log('Error while signing in:', error);
-      this.snackBar.open('Invalid Credentials', 'dismiss', {
+      this.snackBar.open('Error! Unable to register', 'dismiss', {
         duration: 2000,
       });
     }
-
-    var dateOfBirth = new Date(formData.dob).getTime();
-    var joinedDate = new Date(formData.joinedDate).getTime();
-    var downloadURL = this.authService.uploadImage(
-      this.filePath!,
-      formData.emailId
-    );
-    (await downloadURL).subscribe((url) => {
-      console.log('Image URL:', url);
-
-      const newUser = new User(
-        formData.firstName,
-        formData.lastName,
-        formData.gender,
-        formData.emailId,
-        formData.empId,
-        formData.phoneNumber, //mobile number
-        formData.role, //role
-        joinedDate, //joined date
-        'Anju Bhargavi Gunisetti', //reports
-        'Internal', //projectId
-        'Bank Of America', //project name
-        [], //awards[]
-        dateOfBirth, //dateOfBirth
-        url
-      );
-      const myObjStr = JSON.stringify(newUser);
-      console.log(JSON.parse(myObjStr));
-
-      this.firestore
-        .collection('users')
-        .doc(uid)
-        .set(JSON.parse(myObjStr))
-        .then((data) => {
-          console.log('Added user info Successfully:', data);
-          this.isLoading = false;
-          this.snackBar.open('User Registrated succesfully', 'dismiss', {
-            duration: 2000,
-          });
-          //this.router.navigate(['/my-tickets']);
-        })
-        .catch((err) => {
-          console.log('Error while adding user:', err);
-          this.isLoading = false;
-          this.snackBar.open('Error! Unable to register', 'dismiss', {
-            duration: 2000,
-          });
-        });
-    });
   }
 
   validatePasswordAndConfirmPassword(formData: any): boolean {
@@ -190,7 +135,8 @@ export class AppComponent {
       formData.phoneNumber == undefined ||
       formData.gender == undefined ||
       formData.dob == undefined ||
-      formData.file == undefined
+      formData.file == undefined ||
+      formData.file == null
     ) {
       return false;
     }
@@ -211,15 +157,35 @@ export class AppComponent {
     console.log('file:', formData.file);
   }
 
-  login() {
+  async login() {
     console.log('Called Login Method');
     const formData = this.myGroup.value;
-    console.log('Email:', formData.email);
+    console.log('Email:', formData.emailId);
     console.log('password:', formData.password);
-    this.authService.login(formData.email, formData.password);
-    this.snackBar.open('Logged In Successfully', 'dismiss', {
-      duration: 2000,
-    });
+    if (
+      formData.emailId == undefined ||
+      formData.password == undefined ||
+      formData.emailId == null ||
+      formData.password == null
+    ) {
+      this.snackBar.open('Enter email and password', 'dismiss', {
+        duration: 2000,
+      });
+    } else {
+      var result = await this.authService.login(
+        formData.emailId,
+        formData.password
+      );
+      if (result == 0) {
+        this.snackBar.open('Logged In Successfully', 'dismiss', {
+          duration: 2000,
+        });
+      } else {
+        this.snackBar.open('Invalid Credentials', 'dismiss', {
+          duration: 2000,
+        });
+      }
+    }
   }
 
   ngOnInit(): void {

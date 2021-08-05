@@ -26,7 +26,7 @@ export class AuthService {
     });
   }
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string) : Promise<number> {
     console.log('Called login method with credentials:');
     console.log('Email:', email);
     console.log('Password:', password);
@@ -36,8 +36,10 @@ export class AuthService {
         password
       );
       console.log('Result:', result);
+      return 0;
     } catch (e) {
       console.log('Error while login', e);
+      return 1;
     }
     //  this.router.navigate(['admin/list']);
   }
