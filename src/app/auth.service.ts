@@ -61,13 +61,14 @@ export class AuthService {
     return await this.afAuth.sendPasswordResetEmail(passwordResetEmail);
   }
 
-  async uploadImage(file: string, mobileNumber: string) {
+  async uploadImage(file: string, emailId: string) {
+    console.log('Email ID in upload image:', emailId);
     var downloadURL;
-    console.log("In Service:",file);
-    const filePath = '/profiles/' + mobileNumber;
+    console.log('In Service:', file);
+    const filePath = '/profiles/' + emailId;
     const fileRef = this.afStorage.ref(filePath);
     await this.afStorage.upload(filePath, file);
     downloadURL = fileRef.getDownloadURL();
-    return downloadURL;      
+    return downloadURL;
   }
 }

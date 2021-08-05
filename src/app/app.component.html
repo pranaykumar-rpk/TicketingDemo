@@ -13,7 +13,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Email</mat-label>
               <input
-                formControlName="email"
+                formControlName="emailId"
                 type="email"
                 matInput
                 placeholder="Email"
@@ -59,7 +59,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Email</mat-label>
               <input
-                formControlName="email"
+                formControlName="emailId"
                 type="email"
                 matInput
                 placeholder="Email"
@@ -147,7 +147,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="example-full-width">
-              <mat-label>date of birth</mat-label>
+              <mat-label>Date of birth</mat-label>
               <input
                 matInput
                 formControlName="dob"
@@ -157,6 +157,19 @@
               <mat-datepicker-toggle matSuffix [for]="picker">
               </mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Joined Date</mat-label>
+              <input
+                matInput
+                formControlName="joinedDate"
+                [matDatepicker]="picker1"
+                required
+              />
+              <mat-datepicker-toggle matSuffix [for]="picker1">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
 
             <div class="form-group">
@@ -192,13 +205,14 @@
 
   <button mat-button (click)="logout()">Log out</button>
 
-  <label for="file">Choose Profile Picture:</label>&nbsp; &nbsp;
+  <!-- <label for="file">Choose Profile Picture:</label>&nbsp; &nbsp;
   <input
     id="file"
     type="file"
     class="form-control"
     (change)="onFileChange($event)"
   />
-</div>
+</div> -->
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>
