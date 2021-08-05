@@ -21,6 +21,7 @@ export class AppComponent {
   genders: string[] = ['Male', 'Female'];
   selectedGender?: string;
   isLoading: boolean = false;
+  filePath?: string;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -41,52 +42,61 @@ export class AppComponent {
     console.log('gender:', formData.gender);
     console.log('dob:', formData.dob);
     console.log('file:', formData.file);
-    // var uid = await this.authService.register(formData.email,formData.password);
-    
-    var date = new Date(formData.dob);
-    console.log("Date:",date);
-    console.log('Date in milliseconds:', date.getUTCSeconds());
-    var url = '';
-
-    const newUser = new User(
-      formData.firstName,
-      formData.lastName,
-      formData.gender,
-      formData.emailId,
-      formData.empId,
-      formData.phoneNumber,
-      formData.role,
-      null!, //joined date
-      null!, //reports
-      null!, //projectId
-      null!, //project name
-      null!, //awards[]
-      null!, //dateOfBirth
-      url
+    var uid = await this.authService.register(
+      formData.email,
+      formData.password
     );
 
-    const myObjStr = JSON.stringify(newUser);
-    console.log(JSON.parse(myObjStr));
+    var date = new Date(formData.dob);
+    console.log('Date:', date);
+    console.log('Date in milliseconds:', date.getUTCSeconds());
 
-    // this.firestore
-    //   .collection('users')
-    //   .doc(uid)
-    //   .set(JSON.parse(myObjStr))
-    //   .then((data) => {
-    //     console.log('Added user info Successfully:', data);
-    //     this.isLoading = false;
-    //     this.snackBar.open('Raised Ticket Succesfully', 'dismiss', {
-    //       duration: 2000,
-    //     });
-    //     //this.router.navigate(['/my-tickets']);
-    //   })
-    //   .catch((err) => {
-    //     console.log('Error while adding ticket:', err);
-    //     this.isLoading = false;
-    //     this.snackBar.open('Error! Unable to process', 'dismiss', {
-    //       duration: 5000,
-    //     });
-    //   });
+    var downloadURL = this.authService.uploadImage(
+      this.filePath!,
+      formData.emailId
+    );
+    (await downloadURL).subscribe((url) => {
+      console.log('Image URL:', url);
+
+      const newUser = new User(
+        formData.firstName,
+        formData.lastName,
+        formData.gender,
+        formData.emailId,
+        formData.empId,
+        formData.phoneNumber,
+        formData.role,
+        null!, //joined date
+        "Anju Bhargavi Gunisetti", //reports
+        'Internal', //projectId
+        'Bank Of America', //project name
+        [], //awards[]
+        null!, //dateOfBirth
+        url
+      );
+      const myObjStr = JSON.stringify(newUser);
+      console.log(JSON.parse(myObjStr));
+
+      this.firestore
+        .collection('users')
+        .doc(uid)
+        .set(JSON.parse(myObjStr))
+        .then((data) => {
+          console.log('Added user info Successfully:', data);
+          this.isLoading = false;
+          this.snackBar.open('User Registrated succesfully', 'dismiss', {
+            duration: 2000,
+          });
+          //this.router.navigate(['/my-tickets']);
+        })
+        .catch((err) => {
+          console.log('Error while adding user:', err);
+          this.isLoading = false;
+          this.snackBar.open('Error! Unable to register', 'dismiss', {
+            duration: 2000,
+          });
+        });
+    });
   }
   login() {
     console.log('Called Login Method');
@@ -114,7 +124,16 @@ export class AppComponent {
       file: new FormControl(),
     });
   }
-  onFileChange(event: any) {}
+
+  async onFileChange(event: any) {
+    console.log('Event:', event);
+    this.filePath = event.target.files[0];
+    // var  downloadURL =  this.authService.uploadImage(this.filePath!,"7032393942");
+    // (await downloadURL).subscribe(url => {
+    //   console.log("Image URL:",url);
+    //   return url;
+    // });
+  }
 
   logout() {
     console.log('Called logout');

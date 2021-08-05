@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AuthService {
   user: any;
 
-  constructor(public afAuth: AngularFireAuth, public router: Router) {
+  private basePath: string = '/profiles';
+
+  constructor(
+    public afAuth: AngularFireAuth,
+    public router: Router,
+    private afStorage: AngularFireStorage
+  ) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.user = user;
@@ -52,5 +59,15 @@ export class AuthService {
 
   async sendPasswordResetEmail(passwordResetEmail: string) {
     return await this.afAuth.sendPasswordResetEmail(passwordResetEmail);
+  }
+
+  async uploadImage(file: string, mobileNumber: string) {
+    var downloadURL;
+    console.log("In Service:",file);
+    const filePath = '/profiles/' + mobileNumber;
+    const fileRef = this.afStorage.ref(filePath);
+    await this.afStorage.upload(filePath, file);
+    downloadURL = fileRef.getDownloadURL();
+    return downloadURL;      
   }
 }
