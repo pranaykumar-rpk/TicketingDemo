@@ -49,13 +49,13 @@ export class TicketsListComponent implements OnInit {
     });
   }
 
-  getStatus(status?: number){
-    if(status  == 1){
-      return "OPENED";
-    }else if(status == 2){
-      return "CLOSED";
-    }else{
-      return "REOPEN";
+  getStatus(status?: number) {
+    if (status == 1) {
+      return 'OPENED';
+    } else if (status == 2) {
+      return 'CLOSED';
+    } else {
+      return 'REOPEN';
     }
   }
 }

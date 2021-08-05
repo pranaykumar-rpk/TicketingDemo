@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -9,14 +10,22 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class EmployeeDetailsComponent implements OnInit {
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'gender', 'emailId', 'empId', 'mobileNumber', 'role'];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  displayedColumns: string[] = ['firstName', 'lastName', 'gender', 'emailId', 'empId', 'mobileNumber', 'role'];
   dataSource!: MatTableDataSource<any>;
+
   constructor(private firestore: AngularFirestore) { }
+
   ngOnInit() {
     this.firestore.collection("users").valueChanges().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
     })
+    // this.dataSource.paginator = this.paginator;
   }
-  
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+  }
+
 }
