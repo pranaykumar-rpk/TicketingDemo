@@ -9,8 +9,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class AuthService {
   user: any;
 
-  private basePath: string = '/profiles';
-
   constructor(
     public afAuth: AngularFireAuth,
     public router: Router,
@@ -21,7 +19,7 @@ export class AuthService {
         this.user = user;
         console.log('User logged in', user.uid);
         //navigate to home screen
-        this.router.navigate(['user/home']);
+        this.router.navigate(['/home']);
       } else {
         console.log('No User logged in');
       }
@@ -58,7 +56,7 @@ export class AuthService {
   async logout() {
     await this.afAuth.signOut();
     console.log('Logged out');
-    //this.router.navigate(['admin/login']);
+    this.router.navigate(['']);
   }
 
   async sendPasswordResetEmail(passwordResetEmail: string) {
