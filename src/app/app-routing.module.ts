@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './auth/auth.component';
+import { UserHomeComponent } from './user/home/user-home.component';
 
 const routes: Routes = [
   {
     path: 'user',
-    loadChildren: () =>
-      import('./user/user.module').then((mod) => mod.UserModule),
-  },
+     loadChildren: () =>
+       import('./user/user.module').then((mod) => mod.UserModule),
+   },
+  { path: '', component: AuthComponent },
 ];
 
 @NgModule({

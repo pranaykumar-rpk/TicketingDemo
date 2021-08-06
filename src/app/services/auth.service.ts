@@ -21,7 +21,7 @@ export class AuthService {
         this.user = user;
         console.log('User logged in', user.uid);
         //navigate to home screen
-        this.router.navigate(['user/main']);
+        this.router.navigate(['user/home']);
       } else {
         console.log('No User logged in');
       }

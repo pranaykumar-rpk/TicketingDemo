@@ -19,11 +19,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-
+import { AuthComponent } from './auth/auth.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AuthComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -41,7 +41,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     MatNativeDateModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
