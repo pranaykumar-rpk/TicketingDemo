@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
+import { LoginGuard } from './auth/guards/login.guard';
+import { User } from './models/user';
 
 const routes: Routes = [
   {
     path: 'user',
+    canActivate: [LoginGuard],
     loadChildren: () =>
       import('./user/user.module').then((mod) => mod.UserModule),
   },
-  { path: '', component: AuthComponent },
+  { path: 'auth', component: AuthComponent },
+  { path: '**', redirectTo: 'user' },
 ];
 
 @NgModule({

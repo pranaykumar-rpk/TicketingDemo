@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'home/my-tickets', component: UserTicketsComponent },
   { path: 'home/raise-ticket', component: NewTicketComponent },
   { path: 'home/ticket-details', component: TicketDetailsComponent },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({

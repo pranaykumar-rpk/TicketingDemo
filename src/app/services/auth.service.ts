@@ -8,22 +8,23 @@ import { AngularFireStorage } from '@angular/fire/storage';
 })
 export class AuthService {
   user: any;
-
+  isUserLoggedIn: boolean = false;
   constructor(
     public afAuth: AngularFireAuth,
     public router: Router,
     private afStorage: AngularFireStorage
   ) {
-    this.afAuth.authState.subscribe((user) => {
-      if (user) {
-        this.user = user;
-        console.log('User logged in', user.uid);
-        //navigate to home screen
-        this.router.navigate(['/home']);
-      } else {
-        console.log('No User logged in');
-      }
-    });
+    // this.afAuth.authState.subscribe((user) => {
+    //   if (user) {
+    //     this.user = user;
+    //     this.isUserLoggedIn = true;
+    //     console.log('User logged in', user.uid);
+    //     //navigate to home screen
+    //     this.router.navigate(['/home']);
+    //   } else {
+    //     console.log('No User logged in');
+    //   }
+    // });
   }
 
   async login(email: string, password: string): Promise<number> {
@@ -36,12 +37,13 @@ export class AuthService {
         password
       );
       console.log('Result:', result);
+      this.isUserLoggedIn = true;
       return 0;
     } catch (e) {
       console.log('Error while login', e);
+      this.isUserLoggedIn = false;
       return 1;
     }
-    //  this.router.navigate(['admin/list']);
   }
 
   async register(email: string, password: string) {
@@ -56,7 +58,8 @@ export class AuthService {
   async logout() {
     await this.afAuth.signOut();
     console.log('Logged out');
-    this.router.navigate(['']);
+    this.isUserLoggedIn = false;
+    this.router.navigate(['auth']);
   }
 
   async sendPasswordResetEmail(passwordResetEmail: string) {
