@@ -14,13 +14,15 @@ export class AuthService {
     public router: Router,
     private afStorage: AngularFireStorage
   ) {
+    console.log('Called Auth service constructor:');
+    console.log('User :', this.user);
     // this.afAuth.authState.subscribe((user) => {
     //   if (user) {
     //     this.user = user;
     //     this.isUserLoggedIn = true;
     //     console.log('User logged in', user.uid);
     //     //navigate to home screen
-    //     this.router.navigate(['/home']);
+    //     // this.router.navigate(['user/home']);
     //   } else {
     //     console.log('No User logged in');
     //   }
@@ -38,6 +40,8 @@ export class AuthService {
       );
       console.log('Result:', result);
       this.isUserLoggedIn = true;
+      console.log('Navigating to home screen');
+      this.router.navigate(['home']);
       return 0;
     } catch (e) {
       console.log('Error while login', e);
