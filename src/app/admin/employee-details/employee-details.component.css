@@ -1,7 +1,3 @@
-table {
-    width: 100%;
-  }  
-
 .hide{
     display: none;
 }
@@ -10,3 +6,31 @@ tr.mat-footer-cell{
     justify-content: center;
     font-style: italic;
 }
+
+table {
+    width: 97%;
+    margin: 2rem;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 2rem;
+}
+  
+.mat-cell {
+    padding-left: 30px;
+    padding-right: 30px;
+    text-overflow: ellipsis;
+}
+  
+.mat-header-cell {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.filter{
+    position: relative;
+    left: 56px;
+}
+
+::ng-deep .mat-form-field-underline{   background-color: red !important; }

@@ -21,11 +21,9 @@ export class EmployeeDetailsComponent implements OnInit {
     this.firestore.collection("users").valueChanges().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
     })
-    // this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
 }
