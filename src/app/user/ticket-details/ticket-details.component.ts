@@ -12,8 +12,8 @@ export class TicketDetailsComponent implements OnInit {
   array: Ticket[] = [];
   totalTickets?: number = 0;
   openedTickets?: number = 0;
-  closedTickets?: number= 0;
-  reopnedTickets?: number = 0 ;
+  closedTickets?: number = 0;
+  reopnedTickets?: number = 0;
 
   constructor(private firestore: AngularFirestore) {}
 
@@ -58,7 +58,7 @@ export class TicketDetailsComponent implements OnInit {
       } else if (this.array[i].status == 1) {
         this.closedTickets += 1;
       } else {
-        this.reopnedTickets +=1;
+        this.reopnedTickets += 1;
       }
     }
   }

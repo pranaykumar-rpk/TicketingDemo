@@ -136,7 +136,7 @@ export class NewTicketComponent implements OnInit {
         this.snakBar.open('Raised Ticket Succesfully', 'dismiss', {
           duration: 2000,
         });
-        this.router.navigate(['/my-tickets']);
+        this.router.navigate(['/tickets-details']);
       })
       .catch((err) => {
         console.log('Error while adding ticket:', err);

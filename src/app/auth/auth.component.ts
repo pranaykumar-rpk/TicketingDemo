@@ -28,10 +28,11 @@ export class AuthComponent implements OnInit {
     private authService: AuthService,
     private firestore: AngularFirestore
   ) {}
+  
 
   async register() {
     this.isLoading = true;
-    console.log('Called ReGister Method');
+    console.log('Called Register Method');
     const formData = this.myGroup.value;
     this.printDetails(formData);
     if (this.checkAllFileds(formData)) {

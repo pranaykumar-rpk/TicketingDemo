@@ -15,7 +15,7 @@
           <mat-card-content class="dashboard-card-content">
             <div *ngIf="card.title == 'Basic Info'">
               <div>
-                <img class="img-wrap" src="assets/MyProfile.jpg" alt="img" />
+                <img class="img-wrap" [src]='getUrl()' alt="img" />
               </div>
 
               <div class="basic-info">

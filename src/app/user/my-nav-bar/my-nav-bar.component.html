@@ -1,12 +1,13 @@
-<mat-toolbar color='primary' class="mat-elevation-z8">
-    <mat-icon>home</mat-icon> <em>Welcome, Pranay</em> 
-    
-    <div class="spacer"></div>
+<mat-toolbar color="primary" class="mat-elevation-z8">
+  <mat-icon>home</mat-icon> <em>Welcome</em>
 
-    <a mat-button routerLink='home'>Home</a>
-    <a mat-button routerLink='my-tickets'>My Tickets</a>
-    <a mat-button routerLink='raise-ticket'>New Ticket</a>
-    <a mat-button routerLink='ticket-details'>Ticket Details</a>
-    <a mat-raised-button (click)='signOut()'>Logout</a>
+  <div class="spacer"></div>
 
+  <button mat-button (click)="navigateTo('home')">Home</button>
+  <!-- <a mat-button (click)='navigateTo("myTickets")'>My Tickets</a> -->
+  <button mat-button (click)="navigateTo('raise-ticket')">New Ticket</button>
+  <button mat-button (click)="navigateTo('ticket-details')">
+    Ticket Details
+  </button>
+  <button mat-raised-button (click)="signOut()">Logout</button>
 </mat-toolbar>

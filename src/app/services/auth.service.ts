@@ -9,6 +9,12 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class AuthService {
   user: any;
   isUserLoggedIn: boolean = false;
+
+  getUid() {
+    console.log('called get uid method', this.user.uid);
+    return this.user.uid;
+  }
+
   constructor(
     public afAuth: AngularFireAuth,
     public router: Router,
@@ -16,17 +22,17 @@ export class AuthService {
   ) {
     console.log('Called Auth service constructor:');
     console.log('User :', this.user);
-    // this.afAuth.authState.subscribe((user) => {
-    //   if (user) {
-    //     this.user = user;
-    //     this.isUserLoggedIn = true;
-    //     console.log('User logged in', user.uid);
-    //     //navigate to home screen
-    //     // this.router.navigate(['user/home']);
-    //   } else {
-    //     console.log('No User logged in');
-    //   }
-    // });
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.user = user;
+        this.isUserLoggedIn = true;
+        console.log('User logged in', user.uid);
+        //navigate to home screen
+        // this.router.navigate(['user/home']);
+      } else {
+        console.log('No User logged in');
+      }
+    });
   }
 
   async login(email: string, password: string): Promise<number> {

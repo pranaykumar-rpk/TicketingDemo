@@ -8,9 +8,9 @@ import { TicketDetailsComponent } from './ticket-details/ticket-details.componen
 const routes: Routes = [
   { path: 'home', component: UserHomeComponent },
   //{ path: 'main', component: MainComponentComponent },
-  { path: 'home/my-tickets', component: UserTicketsComponent },
-  { path: 'home/raise-ticket', component: NewTicketComponent },
-  { path: 'home/ticket-details', component: TicketDetailsComponent },
+  { path: 'my-tickets', component: UserTicketsComponent },
+  { path: 'raise-ticket', component: NewTicketComponent },
+  { path: 'ticket-details', component: TicketDetailsComponent },
   { path: '**', redirectTo: 'home' },
 ];
 
