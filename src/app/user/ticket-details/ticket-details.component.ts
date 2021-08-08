@@ -19,7 +19,8 @@ export class TicketDetailsComponent implements OnInit {
 
   constructor(
     private firestore: AngularFirestore,
-    private profileService: ProfileServiceService
+    private profileService: ProfileServiceService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -32,11 +33,10 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   loadData() {
+    const uid = this.authService.getUid();
     this.firestore
       .collection('tickets', (ref) =>
-        ref
-          .where('raisedBy', '==', this.profileService.getuserData()?.emailId)
-          .orderBy('loggedDate', 'desc')
+        ref.where('raisedBy', '==', uid).orderBy('loggedDate', 'desc')
       )
       .valueChanges()
       .subscribe((data) => {

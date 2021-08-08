@@ -7,7 +7,9 @@ import { Item } from 'src/app/models/item';
 import { StatusTicket } from 'src/app/models/status-ticket.enum';
 import { Ticket } from 'src/app/models/ticket';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProfileServiceService } from '../profile-service.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-new-ticket',
@@ -26,7 +28,9 @@ export class NewTicketComponent implements OnInit {
     private firestore: AngularFirestore,
     private database: AngularFireDatabase,
     private snakBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {}
 
   categories: Category[] = [
@@ -103,6 +107,7 @@ export class NewTicketComponent implements OnInit {
 
   submitTicket() {
     console.log('Submit Ticket was called');
+    const uid = this.authService.getUid();
     this.isLoading = true;
     var currentTimeInMilliseconds = Date.now(); // unix timestamp in milliseconds
     console.log('Time in millisceonds:', currentTimeInMilliseconds);
@@ -116,7 +121,7 @@ export class NewTicketComponent implements OnInit {
       StatusTicket.OPEN, //ticketrStatus
       currentTimeInMilliseconds, //loggedDate
       null!, //resolvedDate
-      '1797150', //raisedBy
+      uid, //raisedBy
       'admin', //assignedTo
       formData.cat, //category
       formData.type, //type
@@ -136,7 +141,9 @@ export class NewTicketComponent implements OnInit {
         this.snakBar.open('Raised Ticket Succesfully', 'dismiss', {
           duration: 2000,
         });
-        this.router.navigate(['/tickets-details']);
+        this.router.navigate(['ticket-details'], {
+          relativeTo: this.route.parent,
+        });
       })
       .catch((err) => {
         console.log('Error while adding ticket:', err);
