@@ -45,56 +45,65 @@
       </div>
     </div>
 
-    <mat-card class="ticket-details">
-      <div class="content">
-        <div class="title">Ticket Id</div>
-        <div class="description">{{ selectedTicket?.ticketId }}</div>
+    <div class="container">
+      <div *ngIf="totalTickets == 0; else elseBlock">
+        <p class="msg">No tickets raised</p>
       </div>
+      <ng-template #elseBlock>
+        <mat-card class="ticket-details">
+          <div class="content">
+            <div class="title">Ticket Id</div>
+            <div class="description">{{ selectedTicket?.ticketId }}</div>
+          </div>
 
-      <div class="content">
-        <div class="title">Status</div>
-        <div class="description">{{ getStatus(selectedTicket?.status) }}</div>
-      </div>
+          <div class="content">
+            <div class="title">Status</div>
+            <div class="description">
+              {{ getStatus(selectedTicket?.status) }}
+            </div>
+          </div>
 
-      <div class="content">
-        <div class="title">Category</div>
-        <div class="description">{{ selectedTicket?.category }}</div>
-      </div>
+          <div class="content">
+            <div class="title">Category</div>
+            <div class="description">{{ selectedTicket?.category }}</div>
+          </div>
 
-      <div class="content">
-        <div class="title">Type</div>
-        <div class="description">{{ selectedTicket?.type }}</div>
-      </div>
+          <div class="content">
+            <div class="title">Type</div>
+            <div class="description">{{ selectedTicket?.type }}</div>
+          </div>
 
-      <div class="content">
-        <div class="title">Item</div>
-        <div class="description">{{ selectedTicket?.item }}</div>
-      </div>
+          <div class="content">
+            <div class="title">Item</div>
+            <div class="description">{{ selectedTicket?.item }}</div>
+          </div>
 
-      <div class="content">
-        <div class="title">Description</div>
-        <div class="description">{{ selectedTicket?.description }}</div>
-      </div>
+          <div class="content">
+            <div class="title">Description</div>
+            <div class="description">{{ selectedTicket?.description }}</div>
+          </div>
 
-      <div class="content">
-        <div class="title">Raised By</div>
-        <div class="description">{{ selectedTicket?.raisedBy }}</div>
-      </div>
+          <div class="content">
+            <div class="title">Raised By</div>
+            <div class="description">{{ selectedTicket?.raisedBy }}</div>
+          </div>
 
-      <div class="content">
-        <div class="title">Assigned To</div>
-        <div class="description">{{ selectedTicket?.assignedTo }}</div>
-      </div>
+          <div class="content">
+            <div class="title">Assigned To</div>
+            <div class="description">{{ selectedTicket?.assignedTo }}</div>
+          </div>
 
-      <div class="content">
-        <div class="title">Resolved Date</div>
-        <div class="description">{{ selectedTicket?.resolvedDate }}</div>
-      </div>
+          <div class="content">
+            <div class="title">Resolved Date</div>
+            <div class="description">{{ selectedTicket?.resolvedDate }}</div>
+          </div>
 
-      <div class="content">
-        <div class="title">Solution</div>
-        <div class="description">{{ selectedTicket?.solution }}</div>
-      </div>
-    </mat-card>
+          <div class="content">
+            <div class="title">Solution</div>
+            <div class="description">{{ selectedTicket?.solution }}</div>
+          </div>
+        </mat-card>
+      </ng-template>
+    </div>
   </div>
 </mat-drawer-container>

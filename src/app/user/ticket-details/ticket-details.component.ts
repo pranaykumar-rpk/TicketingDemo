@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Ticket } from 'src/app/models/ticket';
+import { AuthService } from 'src/app/services/auth.service';
+import { ProfileServiceService } from '../profile-service.service';
 
 @Component({
   selector: 'app-ticket-details',
@@ -15,7 +17,10 @@ export class TicketDetailsComponent implements OnInit {
   closedTickets?: number = 0;
   reopnedTickets?: number = 0;
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private profileService: ProfileServiceService
+  ) {}
 
   ngOnInit() {
     this.loadData();
@@ -29,7 +34,9 @@ export class TicketDetailsComponent implements OnInit {
   loadData() {
     this.firestore
       .collection('tickets', (ref) =>
-        ref.where('raisedBy', '==', '1797150').orderBy('loggedDate', 'desc')
+        ref
+          .where('raisedBy', '==', this.profileService.getuserData()?.emailId)
+          .orderBy('loggedDate', 'desc')
       )
       .valueChanges()
       .subscribe((data) => {
@@ -46,6 +53,7 @@ export class TicketDetailsComponent implements OnInit {
         this.updateDetails();
       });
   }
+
   updateDetails() {
     this.totalTickets = this.array.length;
     this.openedTickets = 0;

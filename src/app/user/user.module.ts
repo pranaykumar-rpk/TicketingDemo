@@ -21,10 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { TicketDetailsComponent } from './ticket-details/ticket-details.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatDividerModule} from '@angular/material/divider';
-
-
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -53,7 +51,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatSnackBarModule,
     MatTableModule,
     MatSidenavModule,
-    MatDividerModule
+    MatDividerModule,
   ],
   exports: [UserHomeComponent, MainComponentComponent, DashComponent],
 })

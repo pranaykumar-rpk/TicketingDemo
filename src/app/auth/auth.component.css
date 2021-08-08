@@ -27,3 +27,10 @@
   height: 40px;
   background-color: #3f51b5;
 }
+.forgotPassword {
+  text-align: right;
+  margin: 5px;
+}
+.mat-spinner {
+  align-items: center;
+}

@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'src/app/models/user';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-auth',
@@ -26,12 +28,12 @@ export class AuthComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private authService: AuthService,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private router: Router,
+    private afAuth: AngularFireAuth
   ) {}
-  
 
   async register() {
-    this.isLoading = true;
     console.log('Called Register Method');
     const formData = this.myGroup.value;
     this.printDetails(formData);
@@ -57,6 +59,7 @@ export class AuthComponent implements OnInit {
   }
 
   async authenticate(formData: any) {
+    this.isLoading = true;
     try {
       var uid = await this.authService.register(
         formData.emailId,
@@ -101,7 +104,7 @@ export class AuthComponent implements OnInit {
             this.snackBar.open('User Registrated succesfully', 'dismiss', {
               duration: 2000,
             });
-            //this.router.navigate(['/my-tickets']);
+            this.router.navigate(['home']);
           })
           .catch((err) => {
             console.log('Error while adding user:', err);
@@ -173,20 +176,27 @@ export class AuthComponent implements OnInit {
         duration: 2000,
       });
     } else {
+      this.isLoading = true;
       var result = await this.authService.login(
         formData.emailId,
         formData.password
       );
       if (result == 0) {
+        this.isLoading = false;
         this.snackBar.open('Logged In Successfully', 'dismiss', {
           duration: 2000,
         });
       } else {
+        this.isLoading = false;
         this.snackBar.open('Invalid Credentials', 'dismiss', {
           duration: 2000,
         });
       }
     }
+  }
+
+  forgotPassword() {
+    console.log('Called forgot password');
   }
 
   ngOnInit(): void {
@@ -217,5 +227,16 @@ export class AuthComponent implements OnInit {
     this.snackBar.open('Logg out succesfully', 'dismiss', {
       duration: 2000,
     });
+  }
+
+  ForgotPassword(passwordResetEmail: string) {
+    return this.afAuth
+      .sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        window.alert('Password reset email sent, check your inbox.');
+      })
+      .catch((error: any) => {
+        window.alert(error);
+      });
   }
 }

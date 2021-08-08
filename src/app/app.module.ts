@@ -20,7 +20,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AuthComponent } from './auth/auth.component';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent, AuthComponent],
@@ -43,6 +43,7 @@ import { AuthComponent } from './auth/auth.component';
     AngularFireAuthModule,
     AngularFireStorageModule,
     UserModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
