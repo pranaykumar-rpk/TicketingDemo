@@ -62,19 +62,15 @@ export class NewTicketComponent implements OnInit {
   ];
 
   administrativeTypes: Item[] = [
-    { value: 'Transportation', viewValue: 'APAC' },
-    { value: 'Remote Energy Monitoring', viewValue: 'Career Hub' },
-    { value: 'Clinet Visit Management', viewValue: 'EditTicketComponent' },
-    { value: 'Despatch', viewValue: 'Ireland' },
-    { value: 'Workstation', viewValue: 'Chile' },
+    { value: 'Transportation', viewValue: 'Transportation' },
+    { value: 'Remote Energy Monitoring', viewValue: 'Remote Energy Monitoring' },
+    { value: 'Clinet Visit Management', viewValue: 'Clinet Visit Management' },
+    { value: 'Despatch', viewValue: 'Despatch' },
+    { value: 'Workstation', viewValue: 'Workstation' },
   ];
 
   internalItems: Item[] = [
-    { value: 'Asset', viewValue: 'APAC' },
-    { value: 'Remote Energy Monitoring', viewValue: 'Career Hub' },
-    { value: 'Clinet Visit Management', viewValue: 'EditTicketComponent' },
-    { value: 'Despatch', viewValue: 'Ireland' },
-    { value: 'Workstation', viewValue: 'Chile' },
+    { value: 'Asset', viewValue: 'Asset' }
   ];
 
   hrItems: Item[] = [
