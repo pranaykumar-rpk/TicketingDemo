@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dest/TicketingSystem",
+    "public": "dist/TicketingSystem",
     "ignore": [
       "firebase.json",
       "**/.*",
