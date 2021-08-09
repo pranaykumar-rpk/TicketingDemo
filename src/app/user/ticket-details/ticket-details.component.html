@@ -85,7 +85,7 @@
 
           <div class="content">
             <div class="title">Raised By</div>
-            <div class="description">{{ selectedTicket?.raisedBy }}</div>
+            <div class="description">{{ getEmailId() }}</div>
           </div>
 
           <div class="content">
@@ -94,8 +94,17 @@
           </div>
 
           <div class="content">
+            <div class="title">Logged Date</div>
+            <div class="description">
+              {{ getDate(selectedTicket?.loggedDate) }}
+            </div>
+          </div>
+
+          <div class="content">
             <div class="title">Resolved Date</div>
-            <div class="description">{{ selectedTicket?.resolvedDate }}</div>
+            <div class="description">
+              {{ getDate(selectedTicket?.resolvedDate) }}
+            </div>
           </div>
 
           <div class="content">

@@ -33,10 +33,10 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   loadData() {
-    const uid = this.authService.getUid();
+    const email = this.authService.getEmail();
     this.firestore
       .collection('tickets', (ref) =>
-        ref.where('raisedBy', '==', uid).orderBy('loggedDate', 'desc')
+        ref.where('raisedBy', '==', email).orderBy('loggedDate', 'desc')
       )
       .valueChanges()
       .subscribe((data) => {
@@ -85,5 +85,10 @@ export class TicketDetailsComponent implements OnInit {
     } else {
       return 'REOPEN';
     }
+  }
+
+  getEmailId() {
+    console.log('Called get employee id');
+    return this.authService.getEmail();
   }
 }

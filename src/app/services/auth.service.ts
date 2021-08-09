@@ -35,6 +35,11 @@ export class AuthService {
     });
   }
 
+  getEmail() {
+    console.log('returning User email:', this.user.email);
+    return this.user.email;
+  }
+
   async login(email: string, password: string): Promise<number> {
     console.log('Called login method with credentials:');
     console.log('Email:', email);

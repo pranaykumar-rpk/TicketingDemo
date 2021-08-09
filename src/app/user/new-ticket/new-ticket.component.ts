@@ -8,7 +8,6 @@ import { StatusTicket } from 'src/app/models/status-ticket.enum';
 import { Ticket } from 'src/app/models/ticket';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProfileServiceService } from '../profile-service.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -63,15 +62,16 @@ export class NewTicketComponent implements OnInit {
 
   administrativeTypes: Item[] = [
     { value: 'Transportation', viewValue: 'Transportation' },
-    { value: 'Remote Energy Monitoring', viewValue: 'Remote Energy Monitoring' },
+    {
+      value: 'Remote Energy Monitoring',
+      viewValue: 'Remote Energy Monitoring',
+    },
     { value: 'Clinet Visit Management', viewValue: 'Clinet Visit Management' },
     { value: 'Despatch', viewValue: 'Despatch' },
     { value: 'Workstation', viewValue: 'Workstation' },
   ];
 
-  internalItems: Item[] = [
-    { value: 'Asset', viewValue: 'Asset' }
-  ];
+  internalItems: Item[] = [{ value: 'Asset', viewValue: 'Asset' }];
 
   hrItems: Item[] = [
     { value: 'Benifits - HIS', viewValue: 'Benifits - HIS' },
@@ -103,7 +103,7 @@ export class NewTicketComponent implements OnInit {
 
   submitTicket() {
     console.log('Submit Ticket was called');
-    const uid = this.authService.getUid();
+    const emailId = this.authService.getEmail();
     this.isLoading = true;
     var currentTimeInMilliseconds = Date.now(); // unix timestamp in milliseconds
     console.log('Time in millisceonds:', currentTimeInMilliseconds);
@@ -117,7 +117,7 @@ export class NewTicketComponent implements OnInit {
       StatusTicket.OPEN, //ticketrStatus
       currentTimeInMilliseconds, //loggedDate
       null!, //resolvedDate
-      uid, //raisedBy
+      emailId, //raisedBy
       'admin', //assignedTo
       formData.cat, //category
       formData.type, //type
@@ -148,31 +148,5 @@ export class NewTicketComponent implements OnInit {
           duration: 5000,
         });
       });
-
-    // this.ticket = {
-    //   ticketId : "678243o5",
-    //   status : StatusTicket.OPEN,
-    //   raisedBy : "1797150",
-    //   loggedDate : 1627499808,
-    //   item : formData.item,
-    //   description  : formData.description,
-    //   category : formData.cat,
-    //   assignedTo : "admin"
-    //  }
-
-    // this.firestore.collection("tickets").add(this.ticket).then(data=>{
-    //     console.log("Added Ticket Successfully:",data);
-    // }).catch(err=>{
-    //     console.log("Error while adding ticket:", err);
-    // });
-
-    // this.firestore.collection("tickets").doc("7wRJ9xhZNBeBPbcrC6VC").update({
-    //   status: "close",
-    //   solution:"hfkhcewrn"
-    // }).then(doc=>{
-    //     console.log("Updated Successfully");
-    // }).catch(err=>{
-    //   console.log("Error ",err);
-    // });
   }
 }
