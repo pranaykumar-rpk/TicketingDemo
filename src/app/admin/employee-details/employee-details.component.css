@@ -32,5 +32,3 @@ h1 {
     position: relative;
     left: 56px;
 }
-
-::ng-deep .mat-form-field-underline{   background-color: red !important; }

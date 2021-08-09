@@ -9,12 +9,12 @@ h1 {
 }
 
 .mat-cell {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 9px;
+  padding-right: 9px;
   text-overflow: ellipsis;
 }
 
 .mat-header-cell {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 9px;
+  padding-right: 9px;
 }
