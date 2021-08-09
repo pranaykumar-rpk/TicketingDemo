@@ -4,7 +4,8 @@
 }
 
 .grid-container {
-  margin: 20px;
+  /* margin: 10px; */
+  margin: 0px;
 }
 
 .dashboard-card {
@@ -17,7 +18,7 @@
 }
 
 .dashboard-card-content {
-  text-align: start;
+  text-align: left;
 }
 
 .mat-card-title {
@@ -25,8 +26,8 @@
 }
 
 .img-wrap {
-  width: 200px;
-  height: 300px;
+  width: 175px;
+  height: 200px;
   position: relative;
   display: inline-block;
   overflow: hidden;
@@ -34,8 +35,24 @@
 }
 
 .basic-info{
-  padding: 2rem;
+  padding: 0rem;
+  font-size: -inherit; 
 }
+/* .mat-card-title{
+
+        top: 0;
+        left: 1;
+        width: 250px;
+        position: absolute;
+}
+
+  /* position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+
+} */
 
 .variation{ 
   display: flex;
@@ -43,6 +60,5 @@
  }
 
 .title{
-  
   color: orange;
 }

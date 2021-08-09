@@ -19,10 +19,14 @@
               </div>
 
               <div class="basic-info">
-                <h2>{{ userData?.firstName }}, {{ userData?.lastName }}</h2>
-                <p>Email Id: {{ userData?.emailId }}</p>
-                <p>Phone: {{ userData?.mobileNumber }}</p>
-                <p>Date of Birth: {{ getDate(userData?.dateOfBirth) }}</p>
+                <h2><mat-icon matSuffix><span class="material-icons-outlined">
+                    drive_file_rename_outline
+                  </span></mat-icon>
+                  {{ userData?.firstName }}, {{ userData?.lastName }}</h2>
+                <p><mat-icon matSuffix>email</mat-icon> {{ userData?.emailId }}</p>
+                <p><mat-icon matSuffix>phone</mat-icon> {{ userData?.mobileNumber }}</p>
+                <p><mat-icon>date_range</mat-icon>
+                  Date of Birth: {{ getDate(userData?.dateOfBirth) }}</p>
               </div>
             </div>
 
