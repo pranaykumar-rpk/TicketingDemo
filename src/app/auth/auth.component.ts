@@ -38,17 +38,23 @@ export class AuthComponent implements OnInit {
     const formData = this.myGroup.value;
     this.printDetails(formData);
     if (this.checkAllFileds(formData)) {
-      if (this.validatePasswordAndConfirmPassword(formData)) {
-        this.authenticate(formData);
+      if (!this.ValidateEmail(formData.emailId)) {
+        this.snackBar.open('Enter valid email', 'dismiss', {
+          duration: 2000,
+        });
       } else {
-        this.isLoading = false;
-        this.snackBar.open(
-          'Password and Confirm password not matched',
-          'dismiss',
-          {
-            duration: 2000,
-          }
-        );
+        if (this.validatePasswordAndConfirmPassword(formData)) {
+          this.authenticate(formData);
+        } else {
+          this.isLoading = false;
+          this.snackBar.open(
+            'Password and Confirm password not matched',
+            'dismiss',
+            {
+              duration: 2000,
+            }
+          );
+        }
       }
     } else {
       this.isLoading = false;
@@ -176,21 +182,28 @@ export class AuthComponent implements OnInit {
         duration: 2000,
       });
     } else {
-      this.isLoading = true;
-      var result = await this.authService.login(
-        formData.emailId,
-        formData.password
-      );
-      if (result == 0) {
+      if (!this.ValidateEmail(formData.emailId)) {
         this.isLoading = false;
-        this.snackBar.open('Logged In Successfully', 'dismiss', {
+        this.snackBar.open('Enter valid email', 'dismiss', {
           duration: 2000,
         });
       } else {
-        this.isLoading = false;
-        this.snackBar.open('Invalid Credentials', 'dismiss', {
-          duration: 2000,
-        });
+        this.isLoading = true;
+        var result = await this.authService.login(
+          formData.emailId,
+          formData.password
+        );
+        if (result == 0) {
+          this.isLoading = false;
+          this.snackBar.open('Logged In Successfully', 'dismiss', {
+            duration: 2000,
+          });
+        } else {
+          this.isLoading = false;
+          this.snackBar.open('Invalid Credentials', 'dismiss', {
+            duration: 2000,
+          });
+        }
       }
     }
   }
@@ -238,5 +251,13 @@ export class AuthComponent implements OnInit {
       .catch((error: any) => {
         window.alert(error);
       });
+  }
+
+  ValidateEmail(mail: string) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      return true;
+    }
+    alert('You have entered an invalid email address!');
+    return false;
   }
 }

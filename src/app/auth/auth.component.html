@@ -60,6 +60,7 @@
                     placeholder="EmpId"
                     value=""
                     required
+                    maxlength="10"
                   />
                   <mat-icon matSuffix>perm_identity</mat-icon>
                 </mat-form-field>
@@ -84,6 +85,8 @@
                     matInput
                     placeholder="Password"
                     required
+                    minlength="6"
+                    maxlength="20"
                   />
                   <mat-icon matSuffix>vpn_key</mat-icon>
                 </mat-form-field>
@@ -95,6 +98,8 @@
                     matInput
                     placeholder="Password"
                     required
+                    minlength="6"
+                    maxlength="20"
                   />
                   <mat-icon matSuffix>vpn_key</mat-icon>
                 </mat-form-field>
@@ -107,6 +112,7 @@
                     matInput
                     placeholder="FirstName"
                     required
+                    maxlength="15"
                   />
                   <mat-icon matSuffix
                     ><span class="material-icons-outlined">
@@ -122,6 +128,7 @@
                     formControlName="lastName"
                     placeholder="LastName"
                     required
+                    maxlength="15"
                   />
                   <mat-icon matSuffix
                     ><span class="material-icons-outlined">
@@ -137,6 +144,7 @@
                     formControlName="role"
                     placeholder="Role"
                     required
+                    maxlength="30"
                   />
                   <mat-icon matSuffix>local_offer</mat-icon>
                 </mat-form-field>
@@ -150,6 +158,7 @@
                     placeholder="Telephone"
                     value=""
                     required
+                    maxlength="10"
                   />
                   <mat-icon matSuffix>phone</mat-icon>
                 </mat-form-field>
@@ -186,6 +195,7 @@
                     formControlName="file"
                     id="file"
                     type="file"
+                    accept="image/png, image/jpeg"
                     class="form-control"
                     (change)="onFileChange($event)"
                   />
