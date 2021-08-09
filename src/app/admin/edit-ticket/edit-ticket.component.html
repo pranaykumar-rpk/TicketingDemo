@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Status Update</h1>
+<mat-form-field>
+  <input matInput [(ngModel)]="newStatus" placeholder="status update" />
+</mat-form-field>
+<mat-form-field>
+  <input
+    matInput
+    [(ngModel)]="newSolution"
+    placeholder="Provide Solution here"
+  />
+</mat-form-field>
+<mat-form-field>
+  <input matInput [(ngModel)]="newResolvedDate" placeholder="resolved date" />
+</mat-form-field>
+<div>
+  <button mat-raised-button color="primary" (click)="updateDescription()">
+    Save
+  </button>
+</div>
+<button mat-raised-button id="cancelButton" color="primary" (click)="onClick()">
+  Cancel
+</button>

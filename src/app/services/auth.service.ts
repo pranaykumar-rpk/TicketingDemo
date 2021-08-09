@@ -27,8 +27,6 @@ export class AuthService {
         this.user = user;
         this.isUserLoggedIn = true;
         console.log('User logged in', user.uid);
-        //navigate to home screen
-        // this.router.navigate(['user/home']);
       } else {
         console.log('No User logged in');
       }
@@ -51,8 +49,14 @@ export class AuthService {
       );
       console.log('Result:', result);
       this.isUserLoggedIn = true;
-      console.log('Navigating to home screen');
-      this.router.navigate(['home']);
+      if (result.user?.email == 'admin@ticketingsystem.com') {
+        console.log('Navigating to Admin home screen');
+        this.router.navigate(['admin']);
+      } else {
+        console.log('Navigating to user home screen');
+        this.router.navigate(['home']);
+      }
+
       return 0;
     } catch (e) {
       console.log('Error while login', e);

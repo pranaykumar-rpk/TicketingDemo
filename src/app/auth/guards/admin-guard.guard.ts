@@ -3,10 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
-  Route,
   Router,
   RouterStateSnapshot,
-  UrlSegment,
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,22 +14,26 @@ import { AuthService } from 'src/app/services/auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginGuard implements CanActivate {
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private afAuth: AngularFireAuth
-  ) {}
+export class AdminGuardGuard implements CanActivate {
+  constructor(private router: Router, private afAuth: AngularFireAuth) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    console.log('Called Login guard');
+    console.log('Called Admin guard');
     return this.afAuth.authState.pipe(
       map((user) => {
         if (user) {
-          return true;
+          if (user.email == 'admin@ticketingsystem.com') {
+            console.log('Moving to admin console');
+            this.router.createUrlTree(['console']);
+            return true;
+          } else {
+            console.log('Moving to Auth screen');
+            this.router.createUrlTree(['/auth']);
+            return false;
+          }
         }
         return this.router.createUrlTree(['/auth']);
       }),
