@@ -1,34 +1,39 @@
-.hide{
-    display: none;
+.hide {
+  display: none;
 }
 
-tr.mat-footer-cell{
-    justify-content: center;
-    font-style: italic;
+tr.mat-footer-cell {
+  justify-content: center;
+  font-style: italic;
+}
+
+.container {
+  width: 97%;
+  margin: 1rem;
 }
 
 table {
-    width: 97%;
-    margin: 2rem;
+  width: 95%;
+  margin: 2rem;
 }
 
 h1 {
-    text-align: center;
-    padding-top: 2rem;
-}
-  
-.mat-cell {
-    padding-left: 30px;
-    padding-right: 30px;
-    text-overflow: ellipsis;
-}
-  
-.mat-header-cell {
-    padding-left: 30px;
-    padding-right: 30px;
+  text-align: center;
+  padding-top: 2rem;
 }
 
-.filter{
-    position: relative;
-    left: 56px;
+.mat-cell {
+  padding-left: 30px;
+  padding-right: 30px;
+  text-overflow: ellipsis;
+}
+
+.mat-header-cell {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.filter {
+  position: relative;
+  left: 56px;
 }

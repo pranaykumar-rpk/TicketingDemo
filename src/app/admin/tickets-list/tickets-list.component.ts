@@ -37,7 +37,7 @@ export class TicketsListComponent implements OnInit {
   }
 
   openDialog(d: any): void {
-    console.log("dialog open");
+    console.log('dialog open');
     const dialogRef = this.dialog.open(EditTicketComponent, {
       width: '350px',
       disableClose: true,
@@ -45,7 +45,7 @@ export class TicketsListComponent implements OnInit {
         solution: d.solution,
         status: d.status,
         resolvedDate: d.resolvedDate,
-        ticketId: d.ticketId
+        ticketId: d.ticketId,
       },
     });
   }
@@ -58,5 +58,14 @@ export class TicketsListComponent implements OnInit {
     } else {
       return 'REOPEN';
     }
+  }
+
+  getDate(seconds?: number) {
+    if (seconds == undefined || seconds == null || seconds == 0) {
+      return '';
+    }
+    var d = new Date(0);
+    d.setUTCMilliseconds(seconds == undefined ? 0 : seconds);
+    return d.toLocaleDateString();
   }
 }

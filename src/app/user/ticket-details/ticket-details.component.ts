@@ -72,6 +72,9 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   getDate(seconds?: number) {
+    if (seconds == undefined || seconds == null || seconds == 0) {
+      return '';
+    }
     var d = new Date(0);
     d.setUTCMilliseconds(seconds == undefined ? 0 : seconds);
     return d.toLocaleDateString();

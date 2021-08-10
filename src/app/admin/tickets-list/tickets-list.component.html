@@ -26,12 +26,16 @@
 
   <ng-container matColumnDef="loggedDate">
     <th mat-header-cell *matHeaderCellDef>Logged Date</th>
-    <td mat-cell *matCellDef="let element">{{ element.loggedDate }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ getDate(element.loggedDate) }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="resolvedDate">
     <th mat-header-cell *matHeaderCellDef>Resolved Date</th>
-    <td mat-cell *matCellDef="let element">{{ element.resolvedDate }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ getDate(element.resolvedDate) }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="raisedBy">

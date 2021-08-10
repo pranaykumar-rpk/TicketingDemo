@@ -1,9 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import {
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 //import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -19,7 +16,7 @@ export class EditTicketComponent {
   constructor(
     private firestore: AngularFirestore,
     public dialogRef: MatDialogRef<EditTicketComponent>,
-   // public toastr: ToastrService,
+    // public toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -51,5 +48,6 @@ export class EditTicketComponent {
 
   // showErrorMsg() {
   //   this.toastr.error('Unable to save, Data is not modified', 'Error Msg',{});
-  // }
+  //}
+ 
 }
