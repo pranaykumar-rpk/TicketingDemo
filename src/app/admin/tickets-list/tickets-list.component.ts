@@ -37,6 +37,7 @@ export class TicketsListComponent implements OnInit {
   }
 
   openDialog(d: any): void {
+    console.log("dialog open");
     const dialogRef = this.dialog.open(EditTicketComponent, {
       width: '350px',
       disableClose: true,

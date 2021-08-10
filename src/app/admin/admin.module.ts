@@ -15,7 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
+//import { ToastrModule } from 'ngx-toastr';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
@@ -37,10 +37,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
-    ToastrModule.forRoot({
-      timeOut: 2500,
-      preventDuplicates: true,
-    }),
+    // ToastrModule.forRoot({
+    //   timeOut: 2500,
+    //   preventDuplicates: true,
+    // }),
     FormsModule,
   ],
 })

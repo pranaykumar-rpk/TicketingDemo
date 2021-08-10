@@ -4,7 +4,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
+//import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-ticket',
@@ -19,7 +19,7 @@ export class EditTicketComponent {
   constructor(
     private firestore: AngularFirestore,
     public dialogRef: MatDialogRef<EditTicketComponent>,
-    public toastr: ToastrService,
+   // public toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -32,7 +32,7 @@ export class EditTicketComponent {
       this.newStatus == this.data.status &&
       this.newResolvedDate == this.data.resolvedDate
     ) {
-      this.showErrorMsg();
+      //this.showErrorMsg();
     } else {
       this.firestore.collection('tickets').doc(this.data.ticketId).update({
         solution: this.newSolution,
@@ -49,7 +49,7 @@ export class EditTicketComponent {
     this.newResolvedDate = this.data.resolvedDate;
   }
 
-  showErrorMsg() {
-    this.toastr.error('Unable to save, Data is not modified', 'Error Msg',{});
-  }
+  // showErrorMsg() {
+  //   this.toastr.error('Unable to save, Data is not modified', 'Error Msg',{});
+  // }
 }
